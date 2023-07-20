@@ -1,0 +1,148 @@
+paths:
+  /mongodb/api/carts:
+    post:
+      summary: crea un cart.
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: El carrito fue creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Cart"
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+  /mongodb/api/carts/{id}:
+    get:
+      summary: envia el carrito con el id seleccionado
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del carrito que se desea buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El carrito fue enviado correctamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    delete:
+      summary: elimina todos los productos dentro del carrito seleccionado.
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del carrito al que se le desea eliminar los productos
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Los productos fueron eliminados exitosamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+  /mongodb/api/carts/{cid}/products/{pid}:
+    post:
+      summary: agrega el producto seleccionado dentro del carrito seleccionado
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito al que se desea agregar el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea agregar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto fue agregado al carrito correctamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    delete:
+      summary: elimina el producto seleccionado dentro del carrito seleccionado.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito al que se le desea eliminar el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea eliminar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto fue eliminado exitosamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    put:
+      summary: updatea la cantidad del producto seleccionado dentro del carrito seleccionado
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito al que se le desea updatear el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea updatear
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: La cantidad del producto fue updateada correctamente
+        "400":
+          description: El body esta vacio
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+  /mongodb/api/carts/{cid}/purchase:
+    post:
+      summary: Crea el ticket de compra con el carrito seleccionado
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito con el que se desea crear el ticket de compra
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El ticket fue creado correctamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongodb
+        products:
+          type: array
+          description: El array que va a contener el _id y la cantidad de cada producto agregado al carrito
+      example:
+        _id: ObjectId('640e4104446bd20294ff83d4')
+        products: [{ _id: 640e4104446bd20294ff83d4, quantity: 5 }]

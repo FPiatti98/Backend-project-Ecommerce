@@ -1,0 +1,22 @@
+<div>
+    <h1>Carrito</h1>
+    <a href="/products">Volver</a>
+    <h2>Productos</h2>
+    <div>
+    {{#each cart.products}}
+        <h4>Producto: {{this._id.title}}</h4>
+            <ul>
+            <img src={{this._id.thumbnail}} width="200" height="200">
+            </ul>
+        <ul>
+            <li>Descripcion: {{this._id.description}}</li>
+            <li>Precio: {{this._id.price}}</li>
+            <li>Cantidad:{{this.quantity}}</li>
+        </ul>
+        <button id="removeProd" onclick="removeProd('{{../cart._id}}','{{this._id._id}}')">Eliminar del Carrito</button>
+    {{/each}}
+    </div>
+    <button id="generatePurchase" onclick="generatePurchase('{{cart._id}}')">Generar ticket de compra</button>
+    <button id="emptycart" onclick="emptyCart('{{cart._id}}')">Vaciar carrito</button>
+</div>
+<script src="/js/generatePurchase.js"></script>

@@ -1,0 +1,156 @@
+paths:
+  /mongodb/api/products:
+    post:
+      summary: crea un producto.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createProduct"
+      responses:
+        "200":
+          description: El producto fue creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Product"
+        "400":
+          description: Los datos enviados desde el req.body estan incompletos o no coinciden los tipos
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    get:
+      summary: envia todos los productos usando un paginate
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron enviados correctamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+  /mongodb/api/products/{id}:
+    get:
+      summary: envia el producto con el id seleccionado
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del producto que se desea buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto fue enviado correctamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    put:
+      summary: actualiza el producto seleccionado.
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del producto que se desea modificar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto fue actualizado exitosamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+    delete:
+      summary: elimina el producto seleccionado.
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del producto que se desea eliminar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto fue eliminado exitosamente
+        "500":
+          description: Error interno del servidor, generado usualmente por una falla en la conexion con el servidor o una query defectuosa
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongodb
+        title:
+          type: string
+          description: El titulo del producto
+        description:
+          type: string
+          description: La descripciuon del producto
+        price:
+          type: number
+          description: El precio del producto
+        thumbnail:
+          type: string
+          description: Un array que contiene las imagenes del producto
+        code:
+          type: string
+          description: codigo identificador unico del producto
+        stock:
+          type: number
+          description: Stock del producto
+        status:
+          type: boolean
+          description: status del producto (se puede usar para inhabilitarlo del sistema sin borrarlo de la base de datos)
+        category:
+          type: string
+          description: La categoria del producto
+      example:
+        _id: ObjectId('640e4104446bd20294ff83d4')
+        title: monitor phillips
+        description: 120hz, 1440p, 32 pulgadas
+        price: 120000
+        thumbnail: [/images/monitorphillips1.png]
+        code: abd123
+        stock: 5
+        status: true
+        category: Monitor
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: El titulo del producto
+        description:
+          type: string
+          description: La descripciuon del producto
+        price:
+          type: number
+          description: El precio del producto
+        thumbnail:
+          type: array
+          description: Un array que contiene las imagenes del producto
+        code:
+          type: string
+          description: codigo identificador unico del producto
+        stock:
+          type: number
+          description: Stock del producto
+        category:
+          type: string
+          description: La categoria del producto
+      example:
+        title: monitor phillips
+        description: 120hz, 1440p, 32 pulgadas
+        price: 120000
+        thumbnail: /images/monitorphillips1.png
+        code: abd123
+        stock: 5
+        category: Monitor

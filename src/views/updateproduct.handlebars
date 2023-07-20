@@ -1,0 +1,27 @@
+<div>
+    <h1>Updatear producto</h1>
+    <a href="/products">Volver a la lista de productos</a>
+    <p>Los campos que se dejen en blanco no se actualizaran</p>
+    <div>
+        <form id="UpdateProdForm">
+
+            <label>titulo</label>
+            <input type="text" name="title">
+            <br/>
+            <label>Descripcion</label>
+            <input type="text" name="description">
+            <br/>
+            <label>Precio</label>
+            <input type="number" name="price">
+            <br/>
+            <label>path de la Imagen</label>
+            <input type="text" name="thumbnail">
+            <br/>
+            <label>Stock</label>
+            <input type="number" name="stock">
+            <br/>
+        </form>
+            <button id="update" onclick="update('{{id}}')">Actualizar producto</button>
+    </div>
+</div>
+<script src="/js/updateproduct.js"></script>

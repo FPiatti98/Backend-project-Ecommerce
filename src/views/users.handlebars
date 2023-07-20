@@ -1,0 +1,32 @@
+<a href="/products">Volver</a>
+<button id="deleteManyUsers" onclick="deleteManyUsers()">Eliminar Usuarios que estuvieron inactivos por mas de 48 horas</button>
+{{#if users.isValid}}
+<div>
+    {{#each users.docs}}
+        <h4>Usuario: {{this.first_name}} {{this.last_name}}</h4>
+        <ul>
+            <li>Email: {{this.email}}</li>
+            <li>Edad: {{this.age}}</li>
+            <li>Rol: {{this.role}}</li>
+        </ul>
+          <button id="deleteUser" onclick="deleteUser('{{this.email}}')">Eliminar Usuario</button>
+        {{#eq this.role "user"}}
+            <button id="updateUser" onclick="updateUser('{{this.email}}')">Promover a Administrador</button>
+        {{/eq}}
+    {{/each}}
+
+    <div>
+        {{#if users.hasPrevPage}}
+            <a href={{users.prevLink}}>Anterior</a>
+        {{/if}}
+        &nbsp;
+        {{users.page}}
+        &nbsp;
+        {{#if users.hasNextPage}}
+            <a href={{users.nextLink}}>Siguiente</a>
+        {{/if}}
+        &nbsp;
+    </div>
+</div>
+{{/if}}
+<script src="/js/users.js"></script>

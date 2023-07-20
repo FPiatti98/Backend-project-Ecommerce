@@ -1,0 +1,55 @@
+<div>
+     {{#eq user.role "admin"}}
+       <h1>Bienvenido Administrador {{user.name}} !</h1>
+    {{else}}
+        <h1>Bienvenido {{user.name}} !</h1>
+    {{/eq}}
+
+    <button id="logout" onclick="logOut()">Cerrar sesion</button>
+    
+    {{#eq user.role "admin"}}
+        <button id="createProduct" onclick="createProd()">Crear Producto</button>
+        <button id="getUsers" onclick="getUsers()">Administrar Usuarios</button>
+    {{else}}
+        <button id="goToCart" onclick="goToCart('{{user.cart}}')">Carrito</button>
+    {{/eq}}
+
+</div>
+
+{{#if products.isValid}}
+<div>
+    {{#each products.docs}}
+        <h4>Producto: {{this.title}}</h4>
+        <ul>
+            <img src={{this.thumbnail}} width="200" height="200">
+        </ul>
+        <ul>
+            <li>Descripcion: {{this.description}}</li>
+            <li>Precio: {{this.price}}</li>
+            <li>Stock: {{this.stock}}</li>
+            <li>Categoria: {{this.category}}</li>
+        </ul>
+        {{#eq ../user.role "admin"}}
+            <button id="deleteProduct" onclick="deleteProd('{{this._id}}')">Eliminar Producto</button>
+            <button id="updateProduct" onclick="updateProd('{{this._id}}')">Updatear Producto</button>
+        {{else}}
+            <button id="addToCart" onclick="addProdToCart('{{this._id}}','{{../user.cart}}')">Agregar al Carrito</button>
+        {{/eq}}
+
+    {{/each}}
+
+    <div>
+        {{#if products.hasPrevPage}}
+            <a href={{products.prevLink}}>Anterior</a>
+        {{/if}}
+        &nbsp;
+        {{products.page}}
+        &nbsp;
+        {{#if products.hasNextPage}}
+            <a href={{products.nextLink}}>Siguiente</a>
+        {{/if}}
+        &nbsp;
+    </div>
+</div>
+{{/if}}
+<script src="/js/addProd.js"></script>
