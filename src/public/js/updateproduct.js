@@ -4,7 +4,7 @@ const update = (id) => {
     const updatedProd = {};
     data.forEach((value, key) => {updatedProd[key]=value});
 
-    fetch(`http://localhost:8080/mongodb/api/products/${id}`, {
+    fetch(`/mongodb/api/products/${id}`, {
     method: 'PUT',
     body: JSON.stringify(updatedProd),
     mode: "cors",

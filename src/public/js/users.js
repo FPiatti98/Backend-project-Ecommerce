@@ -1,6 +1,6 @@
 const deleteUser = (email) => {
     //se hace una peticion a la api para eliminar el usuario
-    fetch(`http://localhost:8080/api/users/${email}`, {
+    fetch(`/api/users/${email}`, {
     method: 'DELETE',
     mode: "cors",
   })
@@ -16,7 +16,7 @@ const deleteUser = (email) => {
 
 const updateUser = (email) => {
   //se hace una peticion a la api para promover el usuario a administrador
-  fetch(`http://localhost:8080/api/users/${email}`, {
+  fetch(`/api/users/${email}`, {
     method: 'PUT',
     mode: "cors",
   })
@@ -32,7 +32,7 @@ const updateUser = (email) => {
 
 const deleteManyUsers = () => {
   //se hace una peticion a la api para eliminar a los usuarios inactivos 
-  fetch(`http://localhost:8080/api/users/deletemany`, {
+  fetch(`/api/users/deletemany`, {
     method: 'GET',
     mode: "cors",
   })

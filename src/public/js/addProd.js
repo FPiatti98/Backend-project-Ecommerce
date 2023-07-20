@@ -1,7 +1,7 @@
 const addProdToCart = (id, cartId) => {
 
 //se hace la peticion ala api para agregar un producto al carrito
-  fetch(`http://localhost:8080/mongodb/api/carts/${cartId}/product/${id}`, {
+  fetch(`/mongodb/api/carts/${cartId}/product/${id}`, {
     method: 'POST',
     mode: "cors",
   })
@@ -14,7 +14,7 @@ const addProdToCart = (id, cartId) => {
 };
 
 const logOut = () => {
-  fetch(`http://localhost:8080/api/sessions/logout`, {
+  fetch(`/api/sessions/logout`, {
     method: 'GET',
     mode: "cors",
   })
@@ -35,7 +35,7 @@ const createProd = () => {
 
 const deleteProd = (id) => {
   //se hace una peticion a la api para eliminar el producto
-  fetch(`http://localhost:8080/mongodb/api/products/${id}`, {
+  fetch(`/mongodb/api/products/${id}`, {
     method: 'DELETE',
     mode: "cors",
   })

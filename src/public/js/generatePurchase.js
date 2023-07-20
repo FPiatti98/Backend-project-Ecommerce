@@ -1,5 +1,5 @@
 const generatePurchase = (id) => {
-    fetch(`http://localhost:8080/mongodb/api/carts/${id}/purchase`, {
+    fetch(`/mongodb/api/carts/${id}/purchase`, {
     method: 'GET',
     mode: "cors",
   })
@@ -17,7 +17,7 @@ const generatePurchase = (id) => {
 }
 
 const emptyCart = (id) => {
-  fetch(`http://localhost:8080/mongodb/api/carts/${id}`, {
+  fetch(`/mongodb/api/carts/${id}`, {
     method: 'DELETE',
     mode: "cors",
   })
@@ -32,7 +32,7 @@ const emptyCart = (id) => {
 }
 
 const removeProd = (cartId, prodId) => {
-  fetch(`http://localhost:8080/mongodb/api/carts/${cartId}/product/${prodId}`, {
+  fetch(`/mongodb/api/carts/${cartId}/product/${prodId}`, {
     method: 'DELETE',
     mode: "cors",
   })
