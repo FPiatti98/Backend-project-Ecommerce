@@ -63,8 +63,8 @@ export const getAllProducts = async(req, res) => {
             Products = await productModel.paginate({},{limit: limit, page: page, sort: {price: sort}});
         }
 
-        Products.prevLink = Products.hasPrevPage? `http://localhost:8080/products?page=${Products.prevPage}`:'';
-        Products.nextLink = Products.hasNextPage? `http://localhost:8080/products?page=${Products.nextPage}`:'';
+        Products.prevLink = Products.hasPrevPage? `/products?page=${Products.prevPage}`:'';
+        Products.nextLink = Products.hasNextPage? `/products?page=${Products.nextPage}`:'';
 
         return res.status(200).send(Products)
 

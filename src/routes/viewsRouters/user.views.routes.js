@@ -17,8 +17,8 @@ router.get('/' ,checkAuth, async(req, res) => {
         lean: true
       });
   
-      users.prevLink = users.hasPrevPage ? `http://localhost:8080/users?page=${users.prevPage}&limit=${users.limit}` : '';
-      users.nextLink = users.hasNextPage ? `http://localhost:8080/users?page=${users.nextPage}&limit=${users.limit}` : '';
+      users.prevLink = users.hasPrevPage ? `/users?page=${users.prevPage}&limit=${users.limit}` : '';
+      users.nextLink = users.hasNextPage ? `/users?page=${users.nextPage}&limit=${users.limit}` : '';
       users.isValid = !(page <= 0 || page > users.totalPages);
   
       res.render('users', { users });

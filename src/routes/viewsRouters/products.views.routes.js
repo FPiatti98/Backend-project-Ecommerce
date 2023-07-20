@@ -32,8 +32,8 @@ router.get('/products',checkAuth, async (req, res) => {
             Products = await productModel.paginate({},{limit: limit, page: page, sort: {price: sort}, lean : true});
         }
 
-        Products.prevLink = Products.hasPrevPage? `http://localhost:8080/products?page=${Products.prevPage}&limit=${Products.limit}`:'';
-        Products.nextLink = Products.hasNextPage? `http://localhost:8080/products?page=${Products.nextPage}&limit=${Products.limit}`:'';
+        Products.prevLink = Products.hasPrevPage? `/products?page=${Products.prevPage}&limit=${Products.limit}`:'';
+        Products.nextLink = Products.hasNextPage? `/products?page=${Products.nextPage}&limit=${Products.limit}`:'';
         Products.isValid= !(page<=0||page>Products.totalPages);
 
         res.render('products', {products: Products, user: usuario});
